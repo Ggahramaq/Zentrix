@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { WebAnalytics } from "../components/web-analytics";
 import "./globals.css";
 import "./lab.css";
 
@@ -8,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body>{children}</body></html>;
+  return <html lang="en"><body>{children}<WebAnalytics /></body></html>;
 }
