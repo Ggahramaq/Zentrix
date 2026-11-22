@@ -69,6 +69,7 @@
 .sensor-3d-ready .journey-track-static .journey-story{animation:none;opacity:var(--sensor-story-opacity,1);transform:translateY(var(--sensor-story-y,0));filter:blur(var(--sensor-story-blur,0))}
 .sensor-3d-interacting .sensor-journey-layer{opacity:0!important}
 .sensor-3d-interacting .bayer-board .bayer-tile,.sensor-3d-interacting .bayer-board .bayer-connections,.sensor-3d-interacting .bayer-board .bayer-selector{opacity:1!important}
+.footer-badge{display:flex;justify-content:center;padding:0 20px 24px}.footer-badge img{display:block;width:120px;height:auto}
 @keyframes sensor-entrance{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.sensor-journey-layer canvas{animation:none}}
 

@@ -74,6 +74,14 @@ export default function Home() {
       </section>
       <section className="closing" id="about"><div className="container closing-inner"><div className="closing-kicker"><span className="eyebrow-dot" /> A NEW WAY OF SEEING</div><Reveal><h2>You&apos;ve seen the image.<br /><span>Now see the invisible.</span></h2></Reveal><div className="closing-bottom"><p>The next time you take a photograph, remember: part of its color was calculated.</p><a href="#experiment" className="button button-light">Experiment again <Arrow diagonal /></a></div><div className="closing-art" aria-hidden="true"><i /><i /><i /><i /></div></div></section>
     </main>
-    <footer><div className="container footer-inner"><div><a className="brand footer-brand" href="#top"><Mark /> <span>ZENTRIX</span></a><p>An exploration of the unseen science<br />behind every photograph.</p></div><div className="footer-right"><span>MADE FOR CURIOUS MINDS</span><span>AN INTERACTIVE SIMULATION</span></div></div><div className="container footer-base"><span>ZENTRIX © 2026</span><span>LOOK CLOSER.</span></div></footer>
+    <footer><div className="container footer-inner"><div><a className="brand footer-brand" href="#top"><Mark /> <span>ZENTRIX</span></a><p>An exploration of the unseen science<br />behind every photograph.</p></div><div className="footer-right"><span>MADE FOR CURIOUS MINDS</span><span>AN INTERACTIVE SIMULATION</span></div></div><div className="container footer-base"><span>ZENTRIX © 2026</span><span>LOOK CLOSER.</span></div>
+    <div className="footer-badge">
+      <a href="https://fazier.com/launches/zentrixrgb.site" target="_blank" rel="noopener noreferrer">
+        {/* The official badge is served directly by Fazier. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=launched&theme=dark" width={120} alt="Fazier badge" loading="lazy" />
+      </a>
+    </div>
+    </footer>
   </>;
 }
