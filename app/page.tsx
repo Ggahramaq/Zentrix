@@ -7,9 +7,9 @@ import { ReconstructionLab } from "@/components/reconstruction-lab";
 import { PhotoLab } from "@/components/photo-lab";
 
 const steps = [
-  { number: "01", title: "Measure", text: "A filter lets each sensor site record one color component.", type: "measure" },
-  { number: "02", title: "Estimate", text: "Neighboring samples provide clues about what is missing.", type: "estimate" },
-  { number: "03", title: "Reconstruct", text: "The processor combines measured and estimated values into a full-color image.", type: "reconstruct" },
+  { number: "01", title: "Measure", text: "Each tiny spot measures light through one color filter.", type: "measure" },
+  { number: "02", title: "Guess the missing pieces", text: "Nearby measurements help estimate the other two colors.", type: "estimate" },
+  { number: "03", title: "Build the picture", text: "The camera combines measured and estimated values into a full-color image.", type: "reconstruct" },
 ];
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
@@ -41,19 +41,19 @@ export default function Home() {
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow"><span className="eyebrow-dot" /> THE HIDDEN SCIENCE OF EVERY PHOTO</p>
             <h1 aria-label="Your camera invents color."><span className="headline-line"><span style={{ animationDelay: "0.1s" }}>Your</span> <span style={{ animationDelay: "0.22s" }}>camera</span></span><span className="headline-line"><span style={{ animationDelay: "0.34s" }}>invents</span> <span className="muted-word" style={{ animationDelay: "0.46s" }}>color.</span></span></h1>
-            <p className="hero-description" aria-label="At every site on a typical Bayer-pattern sensor, two color components are missing. Discover how the camera reconstructs them.">{"At every site on a typical Bayer-pattern sensor, two color components are missing. Discover how the camera reconstructs them.".split(" ").map((word, index) => <span aria-hidden="true" key={`${word}-${index}`} style={{ animationDelay: `${0.5 + index * 0.035}s` }}>{word} </span>)}</p>
-            <div className="hero-actions"><a className="button button-primary" href="#experiment">Reveal the illusion <Arrow diagonal /></a><a className="text-link" href="#how-it-works">See how it works <Arrow /></a></div>
+            <p className="hero-description" aria-label="Your camera measures one piece of color information at each tiny spot, then calculates the missing pieces. Sometimes it gets them wrong. Want to see it happen?">{"Your camera measures one piece of color information at each tiny spot, then calculates the missing pieces. Sometimes it gets them wrong. Want to see it happen?".split(" ").map((word, index) => <span aria-hidden="true" key={`${word}-${index}`} style={{ animationDelay: `${0.5 + index * 0.035}s` }}>{word} </span>)}</p>
+            <div className="hero-actions"><a className="button button-primary" href="#sensor-grid">Show me how <Arrow diagonal /></a><a className="text-link" href="#experiment">See the illusion <Arrow /></a></div>
           </div>
           <div className="hero-visual"><SensorGraphic /><div className="visual-caption"><span>THE ART OF SEEING</span><span>01 - 03</span></div></div>
         </div>
         <div className="hero-bottom container"><span>AN INTERACTIVE FIELD NOTE</span><a href="#experiment">SCROLL TO DISCOVER <span>↓</span></a><span>ZENTRIX / 001</span></div>
       </section>
-      <section className="journey-track journey-track-static" aria-label="From camera lens to reconstructed image">
+      <section className="journey-track journey-track-static" id="sensor" aria-label="From camera lens to reconstructed image">
         <div className="container journey-track-inner">
           <div className="journey-story">
             <p className="eyebrow"><span className="eyebrow-dot" /> INSIDE THE CAMERA</p>
-            <h2>Every site sees<br />one color.</h2>
-            <p>The other two color components must be reconstructed.</p>
+            <h2>One tiny spot.<br />One color measurement.</h2>
+            <p>A camera sensor has millions of tiny spots. Each measures light through a red, green, or blue filter. A full-color picture needs all three values at each spot. Where do the missing ones come from?</p>
             <div className="journey-legend"><span><i /> MEASURED</span><span><i /> ESTIMATED FROM NEIGHBORS</span></div>
             <p className="journey-note">A conceptual visualization. Explore the actual reconstruction below.</p>
             <a href="#experiment" className="text-link">Go to the experiment <span className="arrow" aria-hidden="true">→</span></a>

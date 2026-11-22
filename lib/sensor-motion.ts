@@ -1,11 +1,6 @@
 export type SensorRect = { left: number; top: number; width: number; height: number };
 export type SensorFrame = { progress: number; x: number; y: number; side: number; handoff: number };
 
-/** The static grid is usable whenever there is no active 3D handoff. */
-export function isSensorGridLocked(sceneAvailable: boolean, handoff: number): boolean {
-  return sceneAvailable && handoff < 1;
-}
-
 export function smoothRange(value: number, start: number, end: number): number {
   const t = Math.max(0, Math.min(1, (value - start) / (end - start)));
   return t * t * (3 - 2 * t);

@@ -14,6 +14,7 @@ const percent = (value: number) => `${Math.round(value * 100)}%`;
 
 export function BayerSensor() {
   const [selected, setSelected] = useState(5 * SIDE + 5);
+  const [announcement, setAnnouncement] = useState("");
   const [revealed, setRevealed] = useState(false);
   const container = useRef<HTMLDivElement>(null);
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
@@ -50,13 +51,15 @@ export function BayerSensor() {
     nextY = Math.max(0, Math.min(SIDE - 1, nextY));
     const next = nextY * SIDE + nextX;
     setSelected(next);
+    setAnnouncement(`Row ${nextY + 1}, column ${nextX + 1}: ${channels[bayerChannel(nextX, nextY, mosaic.offset)]} filter measured ${percent(mosaic.data[next])}.`);
     buttons.current[next]?.focus();
   }
 
   return <div className="bayer-visual" ref={container}>
     <div className="bayer-visual-heading"><span>FILTER ARRAY / RGGB</span><span>12 × 12 SITES</span></div>
+    <p className="discovery-instruction">Tap a square to see what the sensor knows. Tile colors show filters, not full-color pixels.</p>
     <div className="bayer-stage">
-      <div className="bayer-board-wrap">
+      <div className="bayer-board-wrap" id="sensor-grid">
         <div className={`bayer-board${revealed ? " is-revealed" : ""}`} role="group" aria-label="Bayer sensor sites. Use arrow keys to move between sites.">
           {indexes.map(index => {
             const col = index % SIDE, row = Math.floor(index / SIDE);
@@ -72,7 +75,7 @@ export function BayerSensor() {
               aria-pressed={isSelected}
               tabIndex={isSelected ? 0 : -1}
               onPointerEnter={event => { if (event.pointerType !== "touch") setSelected(index); }}
-              onClick={() => setSelected(index)}
+              onClick={() => { setSelected(index); setAnnouncement(`Row ${row + 1}, column ${col + 1}: ${channels[channel]} filter measured ${percent(mosaic.data[index])}.`); }}
               onFocus={() => setSelected(index)}
               onKeyDown={event => moveSelection(event, index)}
             ><span className="bayer-tile-face" /></button>;
@@ -84,13 +87,21 @@ export function BayerSensor() {
         </div>
       </div>
     </div>
-    <div className="bayer-readout" aria-live="polite" aria-atomic="true">
+    <p className="visually-hidden" role="status">{announcement}</p>
+    <div className="bayer-readout">
       <div className="bayer-readout-top"><span><i /> SELECTED SITE</span><span>ROW {String(y + 1).padStart(2, "0")} / COL {String(x + 1).padStart(2, "0")}</span></div>
+      <p className="sensor-discovery">This spot measured <strong>{channels[measured].toUpperCase()}</strong>. What about the other colors? The camera estimates them from the connected nearby spots.</p>
       <div className="bayer-readout-channels">{channels.map((channel, index) => <div className={`bayer-reading ${channelClasses[index]}${index === measured ? " is-measured" : ""}`} key={channel}>
-        <span><i />{channel}</span><strong>{percent(image.data[selected * 3 + index])}</strong><small>{index === measured ? "MEASURED" : "ESTIMATED"}</small>
+        <span><i />{channel}</span><small>{index === measured ? "Measured here" : "Estimated from neighbors"}</small><strong>{percent(image.data[selected * 3 + index])}</strong>
       </div>)}</div>
       <p>Linear-light values from an idealized grayscale checkerboard. Tile colors show filter types.</p>
     </div>
+    <details className="calculation-details"><summary>See the calculation</summary><p>These are the actual measurements and weights used by bilinear reconstruction for this spot. Values are in linear light.</p>{channels.map((channel, index) => {
+      if (index === measured) return <p key={channel}><strong>{channel}:</strong> measured here = {percent(mosaic.data[selected])}.</p>;
+      const sites = neighbors.filter(site => site.channel === index);
+      const weight = sites.reduce((sum, site) => sum + site.weight, 0);
+      return <p key={channel}><strong>{channel}:</strong> {sites.map(site => `${percent(mosaic.data[site.y * SIDE + site.x])} × ${site.weight} (row ${site.y + 1}, column ${site.x + 1})`).join(" + ")} ÷ {weight} = {percent(image.data[selected * 3 + index])}.</p>;
+    })}</details>
     <p className="bayer-hint">HOVER OR TAP A SITE <span aria-hidden="true">+</span> USE ARROW KEYS TO EXPLORE</p>
   </div>;
 }

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { isSensorGridLocked, sensorFrame, smoothRange } from '../lib/sensor-motion.ts';
+import { sensorFrame, smoothRange } from '../lib/sensor-motion.ts';
 
 test('the animation starts at the hero and ends exactly at the interactive grid', () => {
   const source = { left: 800, top: 250, width: 300, height: 300 };
@@ -22,11 +22,4 @@ test('scroll phases are clamped and deterministic', () => {
   assert.equal(smoothRange(-1, .1, .9), 0);
   assert.equal(smoothRange(2, .1, .9), 1);
   assert.equal(smoothRange(.5, .1, .9), .5);
-});
-
-test('grid unlocks only after the handoff, or when the 3D scene is unavailable', () => {
-  assert.equal(isSensorGridLocked(true, 0), true);
-  assert.equal(isSensorGridLocked(true, 0.99), true);
-  assert.equal(isSensorGridLocked(true, 1), false);
-  assert.equal(isSensorGridLocked(false, 0), false);
 });

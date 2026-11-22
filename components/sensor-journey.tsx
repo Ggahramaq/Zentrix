@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { Component, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { isSensorGridLocked, sensorFrame, smoothRange, type SensorFrame } from "@/lib/sensor-motion";
+import { sensorFrame, smoothRange, type SensorFrame } from "@/lib/sensor-motion";
 
 const SensorScene = dynamic(() => import("./sensor-scene"), { ssr: false });
 
@@ -24,10 +24,9 @@ export function SensorJourney() {
   const [enabled, setEnabled] = useState(false);
   const [failed, setFailed] = useState(false);
   const syncGridLock = useCallback(() => {
-    const locked = isSensorGridLocked(sceneAvailable.current, frame.current.handoff);
-    if (board.current) board.current.inert = locked;
-    document.body.classList.toggle("sensor-3d-locked", locked);
-    if (locked) document.body.classList.remove("sensor-3d-interacting");
+    // Keep the grid in the tab order even before the animated sensor reaches it.
+    if (board.current) board.current.inert = false;
+    document.body.classList.remove("sensor-3d-locked");
   }, []);
   const onReady = useCallback(() => {
     document.body.classList.add("sensor-3d-ready");

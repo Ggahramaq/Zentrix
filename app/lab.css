@@ -55,3 +55,25 @@
 @media(max-width:900px){.lab-layout{gap:32px;grid-template-columns:minmax(0,1fr) minmax(240px,.75fr)}.lab-heading{align-items:start}.challenge{gap:45px}}
 @media(max-width:680px){.lab-section,.photo-section{padding:75px 0 85px}.lab-heading{display:block;margin:55px 0 36px}.lab-heading h2{font-size:clamp(43px,11vw,62px)}.lab-heading>p{margin-top:20px}.lab-layout,.challenge{grid-template-columns:1fr}.lab-side{margin-top:8px}.lab-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.challenge{gap:34px;margin-top:75px;padding-top:40px}.challenge-controls{gap:20px 14px}.photo-source{gap:10px 18px}.photo-source>span{width:100%}.lab-comparison-controls{gap:6px 18px}.lab-comparison-controls label{width:100%;flex-basis:100%}.lab-comparison-controls button{min-height:44px}.lab-image-frame{max-height:none}}
 @media(prefers-reduced-motion:reduce){.lab-method,.challenge-actions button,.photo-upload{transition:none}}
+
+/* Explanations sit next to the evidence without changing the visual language. */
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.discovery-instruction,.comparison-instruction,.challenge-feedback{color:#c6d2e3;font-size:14px;line-height:1.65;margin:14px 0}
+.sensor-discovery{font-size:15px!important;line-height:1.6!important;color:#d6e1f0!important;margin-top:16px!important}
+.sensor-discovery strong{color:#fff}
+.bayer-reading small{display:block;min-height:2.7em;margin-top:8px;font-size:11px;line-height:1.35;letter-spacing:0;text-transform:none}
+.calculation-details,.why-details{border-top:1px solid #354257;border-bottom:1px solid #354257;margin:20px 0;padding:14px 0;color:#bdcbe0}
+.calculation-details summary,.why-details summary{cursor:pointer;color:#e7edfa;font-size:14px;font-weight:600;min-height:36px;display:flex;align-items:center;gap:8px}
+.calculation-details summary::before,.why-details summary::before{content:'+';color:#a7baff;font-size:20px;font-weight:400}
+.calculation-details[open] summary::before,.why-details[open] summary::before{content:'−'}
+.calculation-details p,.why-details p{font-size:13px;line-height:1.65;color:#b8c6d9;margin:10px 0;overflow-wrap:anywhere}
+.discovery-stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding:16px 0 8px}
+.stage-number{font-size:10px;font-weight:700;letter-spacing:.1em;color:#a7baff}
+.sample-grid{display:grid;grid-template-columns:repeat(2,1fr);width:112px;aspect-ratio:1;gap:2px;margin:15px 0;border:1px solid #73849b;background:#354257}
+.sample-grid>span{display:grid;place-items:center;min-width:0}
+.sensor-samples>span{color:white;font-size:12px;line-height:1;text-align:center;align-content:center;gap:5px}
+.sensor-samples small{font-size:11px}.sample-red{background:#7c3546}.sample-green{background:#24604f}.sample-blue{background:#334f89}
+.sample-result{width:112px;aspect-ratio:1;margin:15px 0;border:1px solid #73849b}
+.lab-method strong,.lab-method small{display:block}.lab-method strong{font-size:14px;font-weight:600}.lab-method small{font-size:11px;font-weight:400;color:#9bacc5;margin-top:4px}.lab-method{min-height:60px}
+.lab-metrics span{font-size:12px;letter-spacing:0;text-transform:none;color:#c4d2e4}.lab-metrics small{font-size:12px;line-height:1.55}
+@media(max-width:680px){.discovery-stages{grid-template-columns:1fr;gap:20px}.sample-grid,.sample-result{width:96px}.comparison-instruction,.discovery-instruction{font-size:14px}}
