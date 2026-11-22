@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166 166" role="img" aria-labelledby="title desc">
+  <title id="title">Zentrix icon</title>
+  <desc id="desc">Angular white wireframe cube with a detached upper-left facet</desc>
+  <rect width="166" height="166" fill="#0E0E0E" />
+  <g fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M80 14 L144 51 L144 121 L78 156 L22 122 L22 55" />
+    <path d="M25 48 L67 21 L67 42 L38 60" />
+    <path d="M22 55 L78 87 L22 122" />
+    <path d="M78 87 L78 156" />
+    <path d="M78 87 L144 121" />
+    <path d="M80 14 L100 73 L144 51" />
+    <path d="M78 87 L100 73 L92 96 L78 87" />
+  </g>
+</svg>

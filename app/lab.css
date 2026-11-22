@@ -1,0 +1,57 @@
+.lab-section,.photo-section{background:#0c111b;color:#f5f7fb;padding:110px 0 120px}
+.photo-section{background:#111826}
+.lab-heading{display:flex;align-items:end;justify-content:space-between;gap:36px;margin:76px 0 58px}
+.lab-heading h2{font-size:clamp(52px,6.3vw,86px);margin-top:22px}
+.lab-heading>p{max-width:300px;color:#b5c1d4;font-size:15px;line-height:1.7}
+.lab-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:clamp(36px,6vw,84px);align-items:start}
+.lab-comparison{min-width:0}
+.lab-image-labels{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.12em;font-weight:700;color:#a8b8ce;padding-bottom:15px}
+.lab-image-frame{position:relative;overflow:hidden;background:#09101a;border:1px solid #354359;touch-action:pan-y}
+.lab-image-inner{position:absolute;inset:0;transform-origin:center}
+.lab-image-inner canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;display:block}
+.lab-split-line{position:absolute;top:0;bottom:0;width:1px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.2);pointer-events:none}
+.lab-split-line i{position:absolute;top:50%;left:50%;width:30px;height:30px;transform:translate(-50%,-50%);border:1px solid white;border-radius:50%;background:#142033;box-shadow:0 4px 18px #0006}
+.lab-split-line i:after{content:'↔';position:absolute;inset:0;display:grid;place-items:center;color:white;font-size:15px;font-style:normal}
+.lab-comparison-controls{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:18px 0;border-bottom:1px solid #354257}
+.lab-comparison-controls label{display:flex;align-items:center;gap:12px;flex:1;min-width:190px;color:#b7c5da;font-size:10px;font-weight:700;letter-spacing:.1em}
+.lab-comparison-controls input{flex:1;min-width:100px;accent-color:#a9bcff}
+.lab-comparison-controls button,.photo-source button{border:0;background:none;color:#c5d2e5;font-size:12px;min-height:44px;padding:0;transition:color .25s}
+.lab-comparison-controls button:hover,.photo-source button:hover{color:#fff}
+.lab-side{border-top:1px solid #44526a;padding-top:20px}
+.lab-algorithms{border:0;padding:0;margin:0;min-width:0}
+.lab-algorithms legend,.challenge-controls label,.photo-blur{font-size:10px;line-height:1.5;letter-spacing:.12em;font-weight:700;color:#98aac5}
+.lab-method-list{display:grid;margin-top:16px;border-top:1px solid #2d3b50}
+.lab-method{position:relative;display:flex;align-items:center;min-height:48px;gap:12px;border-bottom:1px solid #2d3b50;color:#aebbd0;font-size:13px;cursor:pointer;transition:color .25s}
+.lab-method.selected{color:#fff}.lab-method:hover{color:white}.lab-method input{accent-color:#8da7ff;width:16px;height:16px;margin:0;flex:none}
+.lab-method-description,.lab-metric-note{margin:18px 0 0;color:#bbc7d8;font-size:13px;line-height:1.7}
+.lab-method-description span,.lab-metric-note{color:#91a2b9}
+.lab-metrics{display:grid;grid-template-columns:1fr 1fr;gap:25px 18px;border-top:1px solid #354257;margin-top:32px;padding-top:25px}
+.lab-metrics div{min-width:0}.lab-metrics span,.lab-metrics small{display:block;font-size:9px;letter-spacing:.09em;font-weight:700;color:#a2b1c9;line-height:1.5}
+.lab-metrics strong{display:block;font-size:29px;letter-spacing:-.04em;font-weight:500;margin:9px 0;color:#f5f7fb}
+.lab-metrics small{font-weight:400;letter-spacing:0;font-size:11px}
+.challenge{display:grid;grid-template-columns:1fr 1fr;gap:clamp(50px,10vw,150px);margin-top:110px;padding-top:54px;border-top:1px solid #354257}
+.challenge h3{font-size:clamp(35px,4vw,54px);line-height:1.04;letter-spacing:-.055em;margin:23px 0}
+.challenge>div:first-child>p:last-child{color:#aebbd0;max-width:380px;line-height:1.7;font-size:15px}
+.challenge-controls{display:grid;grid-template-columns:1fr 1fr;gap:26px 22px}
+.challenge-method{grid-column:1/-1}.challenge-comparison{margin-top:30px;max-width:500px}.challenge-comparison>p{font-size:10px;letter-spacing:.07em;color:#adbed7;margin-top:14px;line-height:1.6}
+.challenge-controls label,.photo-blur{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+.challenge-controls select,.challenge-controls input,.photo-blur input{width:100%;accent-color:#a9bcff}
+.challenge-controls select{height:45px;background:#172132;color:#f5f7fb;border:1px solid #40516b;border-radius:3px;padding:0 12px;font:inherit;letter-spacing:0;font-size:13px;font-weight:500}
+.challenge-controls input[type=range],.photo-blur input{height:28px;cursor:pointer;margin:0}
+.challenge-controls :disabled{opacity:.48;cursor:not-allowed}
+.challenge-controls output,.photo-blur output{color:#dce6f7}
+.challenge-actions{grid-column:1/-1;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.challenge-actions button,.photo-upload{display:inline-flex;align-items:center;justify-content:space-between;gap:20px;min-height:48px;padding:0 15px;background:#25344b;border:1px solid #435671;border-radius:3px;color:#edf3ff;font-size:12px;font-weight:700;transition:background .2s}
+.challenge-actions button:hover,.photo-upload:hover{background:#334761}.challenge-actions button span{color:#b4c5ff;font-size:10px}
+.challenge-actions button+button{background:transparent;border-color:transparent;color:#aebbd0}
+.challenge-controls>p{grid-column:1/-1;color:#96a8bf;font-size:12px;line-height:1.7}
+.photo-source{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:20px}.photo-source>span{font-size:12px;color:#95a6bd;overflow-wrap:anywhere}.photo-upload{position:relative;cursor:pointer}
+.photo-upload input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}.photo-upload:focus-within{outline:3px solid #89a2ff;outline-offset:4px}
+.photo-disclaimer,.photo-error{max-width:750px;margin:0 0 34px;color:#acbbcf;font-size:13px;line-height:1.7}.photo-error{color:#ffc3c9}
+.photo-blur{margin-top:30px;border-top:1px solid #354257;padding-top:24px}.photo-metrics{grid-template-columns:1fr}
+.heatmap-toggle{padding:18px 0;color:#cad6e7;font-size:13px}.heatmap-toggle label{display:flex;align-items:center;gap:10px;cursor:pointer;min-height:44px}.heatmap-toggle input{accent-color:#91a9ff;width:16px;height:16px}.heatmap-toggle p{color:#91a2b9;font-size:12px;line-height:1.6}
+.lab-inspector{display:flex;align-items:center;gap:15px;padding-top:14px}.lab-pixel-previews{display:flex;gap:3px}.lab-pixel-previews[hidden]{display:none}.lab-pixel-previews canvas{width:54px;height:54px;image-rendering:pixelated;border:1px solid #65758f;background:#080e17}.lab-inspect{color:#a5b4c9;font-size:10px;line-height:1.6;letter-spacing:.03em}
+.lab-next-link{display:inline-flex;align-items:center;gap:15px;margin-top:28px;color:#c5d4ed;font-size:12px;font-weight:700;min-height:44px}.lab-next-link:hover{color:#fff}
+@media(max-width:900px){.lab-layout{gap:32px;grid-template-columns:minmax(0,1fr) minmax(240px,.75fr)}.lab-heading{align-items:start}.challenge{gap:45px}}
+@media(max-width:680px){.lab-section,.photo-section{padding:75px 0 85px}.lab-heading{display:block;margin:55px 0 36px}.lab-heading h2{font-size:clamp(43px,11vw,62px)}.lab-heading>p{margin-top:20px}.lab-layout,.challenge{grid-template-columns:1fr}.lab-side{margin-top:8px}.lab-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.challenge{gap:34px;margin-top:75px;padding-top:40px}.challenge-controls{gap:20px 14px}.photo-source{gap:10px 18px}.photo-source>span{width:100%}.lab-comparison-controls{gap:6px 18px}.lab-comparison-controls label{width:100%;flex-basis:100%}.lab-comparison-controls button{min-height:44px}.lab-image-frame{max-height:none}}
+@media(prefers-reduced-motion:reduce){.lab-method,.challenge-actions button,.photo-upload{transition:none}}

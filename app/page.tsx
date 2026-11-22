@@ -1,69 +1,79 @@
-import Image from "next/image";
+import { Experiment } from "@/components/experiment";
+import { Header, Mark } from "@/components/header";
+import { Reveal } from "@/components/reveal";
+import { BayerSensor } from "@/components/bayer-sensor";
+import { SensorJourney } from "@/components/sensor-journey";
+import { ReconstructionLab } from "@/components/reconstruction-lab";
+import { PhotoLab } from "@/components/photo-lab";
+
+const steps = [
+  { number: "01", title: "Measure", text: "A filter lets each sensor site record one color component.", type: "measure" },
+  { number: "02", title: "Estimate", text: "Neighboring samples provide clues about what is missing.", type: "estimate" },
+  { number: "03", title: "Reconstruct", text: "The processor combines measured and estimated values into a full-color image.", type: "reconstruct" },
+];
+
+function Arrow({ diagonal = false }: { diagonal?: boolean }) {
+  return <span aria-hidden="true" className="arrow">{diagonal ? "↗" : "→"}</span>;
+}
+
+function SensorGraphic() {
+  return <div className="sensor-graphic" aria-hidden="true">
+    <div className="sensor-orbit orbit-one" /><div className="sensor-orbit orbit-two" />
+    <div className="sensor-axis axis-horizontal" /><div className="sensor-axis axis-vertical" />
+    <div className="sensor-frame"><div className="sensor-inner"><div className="sensor-grid" /></div></div>
+    <span className="graphic-coordinate coordinate-top">FIG. 01 / SENSOR ARRAY</span>
+    <span className="graphic-coordinate coordinate-bottom">LIGHT IN <span>↗</span> COLOR OUT</span>
+    <span className="graphic-plus plus-a">+</span><span className="graphic-plus plus-b">+</span>
+  </div>;
+}
+
+function StepGraphic({ type }: { type: string }) {
+  return <div className={`step-graphic ${type}`} aria-hidden="true"><div className="mini-grid">{Array.from({ length: 36 }, (_, i) => <i key={i} className={((Math.floor(i / 6) % 2) === 0 ? (i % 2 === 0 ? "r" : "g") : (i % 2 === 0 ? "g" : "b"))} />)}</div><span className="step-line" /></div>;
+}
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+  return <>
+    <Header />
+    <main>
+      <SensorJourney />
+      <section className="hero" id="top">
+        <div className="hero-inner container">
+          <div className="hero-copy">
+            <p className="eyebrow hero-eyebrow"><span className="eyebrow-dot" /> THE HIDDEN SCIENCE OF EVERY PHOTO</p>
+            <h1 aria-label="Your camera invents color."><span className="headline-line"><span style={{ animationDelay: "0.1s" }}>Your</span> <span style={{ animationDelay: "0.22s" }}>camera</span></span><span className="headline-line"><span style={{ animationDelay: "0.34s" }}>invents</span> <span className="muted-word" style={{ animationDelay: "0.46s" }}>color.</span></span></h1>
+            <p className="hero-description" aria-label="At every site on a typical Bayer-pattern sensor, two color components are missing. Discover how the camera reconstructs them.">{"At every site on a typical Bayer-pattern sensor, two color components are missing. Discover how the camera reconstructs them.".split(" ").map((word, index) => <span aria-hidden="true" key={`${word}-${index}`} style={{ animationDelay: `${0.5 + index * 0.035}s` }}>{word} </span>)}</p>
+            <div className="hero-actions"><a className="button button-primary" href="#experiment">Reveal the illusion <Arrow diagonal /></a><a className="text-link" href="#how-it-works">See how it works <Arrow /></a></div>
+          </div>
+          <div className="hero-visual"><SensorGraphic /><div className="visual-caption"><span>THE ART OF SEEING</span><span>01 - 03</span></div></div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="hero-bottom container"><span>AN INTERACTIVE FIELD NOTE</span><a href="#experiment">SCROLL TO DISCOVER <span>↓</span></a><span>ZENTRIX / 001</span></div>
+      </section>
+      <section className="journey-track journey-track-static" aria-label="From camera lens to reconstructed image">
+        <div className="container journey-track-inner">
+          <div className="journey-story">
+            <p className="eyebrow"><span className="eyebrow-dot" /> INSIDE THE CAMERA</p>
+            <h2>Every site sees<br />one color.</h2>
+            <p>The other two color components must be reconstructed.</p>
+            <div className="journey-legend"><span><i /> MEASURED</span><span><i /> ESTIMATED FROM NEIGHBORS</span></div>
+            <p className="journey-note">A conceptual visualization. Explore the actual reconstruction below.</p>
+            <a href="#experiment" className="text-link">Go to the experiment <span className="arrow" aria-hidden="true">→</span></a>
+          </div>
+          <BayerSensor />
         </div>
-      </main>
-    </div>
-  );
+      </section>
+      <Experiment />
+      <ReconstructionLab />
+      <PhotoLab />
+      <section className="how-section" id="how-it-works">
+        <div className="container">
+          <div className="section-topline"><span>THE PROCESS / 02</span><span>FROM LIGHT TO IMAGE</span></div>
+          <div className="how-intro"><Reveal><p className="eyebrow blue-label">A LITTLE SENSOR SCIENCE</p><h2>One measurement.<br /><span>Three colors.</span></h2></Reveal><p>Every photograph begins with an incomplete picture. A remarkably clever process fills in the rest.</p></div>
+          <div className="steps">{steps.map(step => <article className="step" key={step.number}><div className="step-header"><span>{step.number} / 03</span><span>↗</span></div><StepGraphic type={step.type} /><div className="step-copy"><h3>{step.title}</h3><p>{step.text}</p></div></article>)}</div>
+          <div className="process-note"><span className="process-dots"><i /><i /><i /></span><span>MORE GREEN SITES HELP CAPTURE DETAIL</span><span>R G / G B</span></div>
+        </div>
+      </section>
+      <section className="closing" id="about"><div className="container closing-inner"><div className="closing-kicker"><span className="eyebrow-dot" /> A NEW WAY OF SEEING</div><Reveal><h2>You&apos;ve seen the image.<br /><span>Now see the invisible.</span></h2></Reveal><div className="closing-bottom"><p>The next time you take a photograph, remember: part of its color was calculated.</p><a href="#experiment" className="button button-light">Experiment again <Arrow diagonal /></a></div><div className="closing-art" aria-hidden="true"><i /><i /><i /><i /></div></div></section>
+    </main>
+    <footer><div className="container footer-inner"><div><a className="brand footer-brand" href="#top"><Mark /> <span>ZENTRIX</span></a><p>An exploration of the unseen science<br />behind every photograph.</p></div><div className="footer-right"><span>MADE FOR CURIOUS MINDS</span><span>AN INTERACTIVE SIMULATION</span></div></div><div className="container footer-base"><span>ZENTRIX © 2026</span><span>LOOK CLOSER.</span></div></footer>
+  </>;
 }
