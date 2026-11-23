@@ -56,8 +56,8 @@ export function BayerSensor() {
   }
 
   return <div className="bayer-visual" ref={container}>
-    <div className="bayer-visual-heading"><span>FILTER ARRAY / RGGB</span><span>12 × 12 SITES</span></div>
-    <p className="discovery-instruction">Tap a square to see what the sensor knows. Tile colors show filters, not full-color pixels.</p>
+    <div className="bayer-visual-heading"><span>INSIDE THE SENSOR</span><span>12 × 12 SPOTS</span></div>
+    <p className="discovery-instruction">Tap a square to explore. Each color shows what kind of light that spot can measure.</p>
     <div className="bayer-stage">
       <div className="bayer-board-wrap" id="sensor-grid">
         <div className={`bayer-board${revealed ? " is-revealed" : ""}`} role="group" aria-label="Bayer sensor sites. Use arrow keys to move between sites.">
@@ -89,19 +89,13 @@ export function BayerSensor() {
     </div>
     <p className="visually-hidden" role="status">{announcement}</p>
     <div className="bayer-readout">
-      <div className="bayer-readout-top"><span><i /> SELECTED SITE</span><span>ROW {String(y + 1).padStart(2, "0")} / COL {String(x + 1).padStart(2, "0")}</span></div>
-      <p className="sensor-discovery">This spot measured <strong>{channels[measured].toUpperCase()}</strong>. What about the other colors? The camera estimates them from the connected nearby spots.</p>
+      <div className="bayer-readout-top"><span><i /> YOUR SPOT</span><span>ROW {String(y + 1).padStart(2, "0")} / COL {String(x + 1).padStart(2, "0")}</span></div>
+      <p className="sensor-discovery">This spot collects a clue about <strong>{channels[measured].toUpperCase()}</strong> light. The camera uses the connected spots to guess the other two colors.</p>
       <div className="bayer-readout-channels">{channels.map((channel, index) => <div className={`bayer-reading ${channelClasses[index]}${index === measured ? " is-measured" : ""}`} key={channel}>
-        <span><i />{channel}</span><small>{index === measured ? "Measured here" : "Estimated from neighbors"}</small><strong>{percent(image.data[selected * 3 + index])}</strong>
+        <span><i />{channel}</span><small>{index === measured ? "Collected here" : "Guessed from nearby"}</small><strong>{percent(image.data[selected * 3 + index])}</strong>
       </div>)}</div>
-      <p>Linear-light values from an idealized grayscale checkerboard. Tile colors show filter types.</p>
+      <p>The numbers show the clues and guesses for this example.</p>
     </div>
-    <details className="calculation-details"><summary>See the calculation</summary><p>These are the actual measurements and weights used by bilinear reconstruction for this spot. Values are in linear light.</p>{channels.map((channel, index) => {
-      if (index === measured) return <p key={channel}><strong>{channel}:</strong> measured here = {percent(mosaic.data[selected])}.</p>;
-      const sites = neighbors.filter(site => site.channel === index);
-      const weight = sites.reduce((sum, site) => sum + site.weight, 0);
-      return <p key={channel}><strong>{channel}:</strong> {sites.map(site => `${percent(mosaic.data[site.y * SIDE + site.x])} × ${site.weight} (row ${site.y + 1}, column ${site.x + 1})`).join(" + ")} ÷ {weight} = {percent(image.data[selected * 3 + index])}.</p>;
-    })}</details>
-    <p className="bayer-hint">HOVER OR TAP A SITE <span aria-hidden="true">+</span> USE ARROW KEYS TO EXPLORE</p>
+    <p className="bayer-hint">HOVER OR TAP A SPOT <span aria-hidden="true">+</span> USE ARROW KEYS TO EXPLORE</p>
   </div>;
 }
